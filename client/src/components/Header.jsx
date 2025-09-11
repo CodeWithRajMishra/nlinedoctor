@@ -4,17 +4,21 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-
-
+import BackEndURL from "../util/BackEndUrl";
+import axios from "axios";
+import { ToastContainer,  toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header=()=>{
     const [input, setInput] = useState({});
+     const [input1, setInput1] = useState({});
     const [image, setImage] = useState("");
    const [show, setShow] = useState(false);
+    const [show1, setShow1] = useState(false);
   const handleClose = () => setShow(false);
+    const handleClose1 = () => setShow1(false);
   const handleShow = () => setShow(true);
-
-   
+    const handleShow1 = () => setShow1(true);
   const handleImage=(e)=>{
        setImage(e.target.files[0]);
        console.log(e.target.files[0]);
@@ -27,7 +31,42 @@ const Header=()=>{
        console.log(input);
    }
 
+   const handleInput1=(e)=>{
+       let name=e.target.name;
+       let value=e.target.value;
+       setInput(values=>({...values, [name]:value}));
+       console.log(input1);
+   }
+
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    let api=`${BackEndURL}/doctor/doctorsave`;     
+    if (!image) return alert("Please select a Image");
+ const formData = new FormData();
+ formData.append("file", image);
   
+ for (let x in input) {
+      formData.append(x, input[x]);
+    }
+
+ try {
+ const res = await axios.post(api, formData, {
+ headers: { "Content-Type": "multipart/form-data" },
+ });
+
+ console.log(res);
+  setShow(false);
+  toast.info("You are Succesfully Registered!");
+
+
+ } catch (err) {
+ console.error(err);
+ }
+  }
+
+
+    const handleSubmit1=async(e)=>{
+    }
 
     return(
         <>
@@ -39,14 +78,10 @@ const Header=()=>{
                      <img src={mainheading} />
                </div>
                <div id="rightmenu">
-                <Button variant="primary">Login</Button>    <Button variant="primary" onClick={handleShow}>Registration</Button>
+                <Button variant="primary" onClick={handleShow1}>Login</Button>    <Button variant="primary" onClick={handleShow}>Registration</Button>
                </div>
      
             </div>
-
-
-         
-
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Doctor Registration Form</Modal.Title>
@@ -97,13 +132,10 @@ const Header=()=>{
         <Form.Label>Enter Password</Form.Label>
         <Form.Control type="password" name="password" onChange={handleInput} />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" onClick={handleSubmit} type="submit">
         Submit
       </Button>
     </Form>
-
-
-
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
@@ -111,9 +143,55 @@ const Header=()=>{
           </Button>
         </Modal.Footer>
       </Modal>
+        
+   
+   
+   
+   
+   
+   
+   
+   
+           <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Doctor Registration Form</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
 
+          <Form>
+      
+       
+      
+      
+      
+      
+       <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Enter Email</Form.Label>
+        <Form.Control type="text"  name="email1" onChange={handleInput1}/>
+      </Form.Group>
+       <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Label>Enter Password</Form.Label>
+        <Form.Control type="password" name="password1" onChange={handleInput1} />
+      </Form.Group>
+      <Button variant="primary" onClick={handleSubmit1} type="submit">
+        Login
+      </Button>
+    </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose1}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+   
+   
+   
+   
+   
+   
+        <ToastContainer/>
         </>
     )
 }
-
 export default Header;
