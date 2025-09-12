@@ -8,6 +8,8 @@ import BackEndURL from "../util/BackEndUrl";
 import axios from "axios";
 import { ToastContainer,  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import  {useNavigate} from "react-router-dom";
+
 
 const Header=()=>{
     const [input, setInput] = useState({});
@@ -15,10 +17,15 @@ const Header=()=>{
     const [image, setImage] = useState("");
    const [show, setShow] = useState(false);
     const [show1, setShow1] = useState(false);
-  const handleClose = () => setShow(false);
+   const [email1, setEmail1] = useState("");
+   const [password1, setPassword1]= useState("");
+
+    const handleClose = () => setShow(false);
     const handleClose1 = () => setShow1(false);
   const handleShow = () => setShow(true);
     const handleShow1 = () => setShow1(true);
+
+    const navigate = useNavigate();
   const handleImage=(e)=>{
        setImage(e.target.files[0]);
        console.log(e.target.files[0]);
@@ -31,12 +38,7 @@ const Header=()=>{
        console.log(input);
    }
 
-   const handleInput1=(e)=>{
-       let name=e.target.name;
-       let value=e.target.value;
-       setInput(values=>({...values, [name]:value}));
-       console.log(input1);
-   }
+
 
   const handleSubmit=async(e)=>{
     e.preventDefault();
@@ -66,6 +68,16 @@ const Header=()=>{
 
 
     const handleSubmit1=async(e)=>{
+      e.preventDefault();
+       let api=`${BackEndURL}/doctor/doctorlogin`;  
+       try {
+           const response = await axios.post(api, {email:email1, password:password1});
+           console.log(response.data);
+           navigate("/doctordashboard");
+
+       } catch (error) {
+           console.log(error);
+       }
     }
 
     return(
@@ -143,35 +155,20 @@ const Header=()=>{
           </Button>
         </Modal.Footer>
       </Modal>
-        
-   
-   
-   
-   
-   
-   
-   
-   
-           <Modal show={show} onHide={handleClose}>
+           
+           <Modal show={show1} onHide={handleClose1}>
         <Modal.Header closeButton>
-          <Modal.Title>Doctor Registration Form</Modal.Title>
+          <Modal.Title>Doctor Login Form</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-
-          <Form>
-      
-       
-      
-      
-      
-      
+          <Form>    
        <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Enter Email</Form.Label>
-        <Form.Control type="text"  name="email1" onChange={handleInput1}/>
+        <Form.Control type="email"  name="email1" value={email1} onChange={(e)=>{setEmail1(e.target.value)}}/>
       </Form.Group>
        <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Enter Password</Form.Label>
-        <Form.Control type="password" name="password1" onChange={handleInput1} />
+        <Form.Control type="password" name="password1" value={password1} onChange={(e)=>{setPassword1(e.target.value)}} />
       </Form.Group>
       <Button variant="primary" onClick={handleSubmit1} type="submit">
         Login

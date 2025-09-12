@@ -1,6 +1,8 @@
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Layout from "./Layout";
 import Home from "./pages/Home";
+import DoctroDashBoard from "./DoctorDashBoard";
+import PatientList from "./pages/PatientList";
 const App=()=>{
   return(
     <>
@@ -11,6 +13,12 @@ const App=()=>{
              
              
              </Route>
+          </Routes>  
+
+          <Routes>
+            <Route path="/doctordashboard" element={<DoctroDashBoard/>}>
+               <Route path="patientlist" element={<PatientList/>} />  
+            </Route>  
           </Routes>        
         </BrowserRouter>
     </>

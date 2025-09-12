@@ -27,6 +27,42 @@ const doctorSave=async(req, res)=>{
  }
 }
 
+const doctorLogin=async(req, res)=>{
+    const { email, password} = req.body;
+      
+    try {
+          const Doctor = await DoctorModel.findOne({email:email});
+          console.log(Doctor);
+          if (!Doctor)
+          {
+            res.status(401).send({msg:"Email not found!"});
+          }
+
+          if (Doctor.password!=password)
+          {
+            res.status(401).send({msg:"Password does not match!"});
+          }
+
+          res.status(200).send(Doctor);
+
+    } catch (error) {
+         console.log(error);
+    }
+}
+
+const doctorInfo=async(req, res)=>{
+     try {
+          const Doctor = await DoctorModel.find();
+          res.status(200).send(Doctor);
+     } catch (error) {
+        console.log(error);
+     }
+      console.log("HHH");
+      res.send("OKKK");
+}
+
 module.exports={
-    doctorSave
+    doctorSave,
+    doctorLogin,
+    doctorInfo
 }
