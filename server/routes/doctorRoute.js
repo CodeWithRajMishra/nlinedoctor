@@ -8,7 +8,7 @@ route.post("/doctorsave", uploadMiddleware.upload.single("file"),  doctorControl
 
 route.post("/doctorlogin", doctorController.doctorLogin);
 route.get("/doctorinfo", doctorController.doctorInfo);
-
-
+route.post("/searchbyname", doctorController.doctorSearchByName);
+route.post("/searchbycity", doctorController.doctorSearchByCity);
 
 module.exports= route;

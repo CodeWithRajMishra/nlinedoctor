@@ -61,8 +61,22 @@ const doctorInfo=async(req, res)=>{
       res.send("OKKK");
 }
 
+const doctorSearchByName=async(req, res)=>{
+  const {name} = req.body;
+  const Doctor = await DoctorModel.find({doctorname:name});
+  res.status(200).send(Doctor);
+}
+
+const doctorSearchByCity=async(req, res)=>{
+    const {city} = req.body;
+  const Doctor = await DoctorModel.find({city:city});
+  res.status(200).send(Doctor);
+}
+
 module.exports={
     doctorSave,
     doctorLogin,
-    doctorInfo
+    doctorInfo,
+    doctorSearchByName,
+    doctorSearchByCity
 }

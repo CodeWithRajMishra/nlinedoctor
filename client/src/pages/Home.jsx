@@ -10,7 +10,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 const Home=()=>{
 const [mydata, setMydata] = useState([]);
-
 const loadData =async()=>{
    let api=`${BackEndURL}/doctor/doctorinfo`; 
     try {
@@ -46,14 +45,11 @@ const ans=mydata.map((key)=>{
       </>
     )
 })
-
-
     return(
         <>
            <Carousel>
       <Carousel.Item>
          <img src={ban1}  width="100%" height="300"  / >
-
         <Carousel.Caption>
           <h3>First slide label</h3>
           <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
@@ -85,5 +81,4 @@ const ans=mydata.map((key)=>{
         </>
     )
 }
-
 export default Home;
