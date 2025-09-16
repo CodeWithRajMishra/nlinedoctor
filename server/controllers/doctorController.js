@@ -73,10 +73,24 @@ const doctorSearchByCity=async(req, res)=>{
   res.status(200).send(Doctor);
 }
 
+const doctorSearchBySpeciality=async(req, res)=>{
+  const { speciality } = req.body ;
+  const Doctor = await DoctorModel.find({speciality:speciality});
+  res.status(200).send(Doctor);
+}
+
+const getdoctorInfo=async(req, res)=>{
+  const {id} = req.query;
+  const Doctor = await DoctorModel.findById(id);
+  res.send(Doctor);
+}
+
 module.exports={
     doctorSave,
     doctorLogin,
     doctorInfo,
     doctorSearchByName,
-    doctorSearchByCity
+    doctorSearchByCity,
+    doctorSearchBySpeciality,
+    getdoctorInfo
 }

@@ -10,5 +10,9 @@ route.post("/doctorlogin", doctorController.doctorLogin);
 route.get("/doctorinfo", doctorController.doctorInfo);
 route.post("/searchbyname", doctorController.doctorSearchByName);
 route.post("/searchbycity", doctorController.doctorSearchByCity);
+route.post("/searchbyspeciality", doctorController.doctorSearchBySpeciality);
+route.get("/getdocinfo", doctorController.getdoctorInfo);
+
+
 
 module.exports= route;

@@ -8,8 +8,11 @@ import doc1 from "../images/doc1.jpeg";
 import BackEndURL from '../util/BackEndUrl';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 const Home=()=>{
 const [mydata, setMydata] = useState([]);
+const navigate = useNavigate();
 const loadData =async()=>{
    let api=`${BackEndURL}/doctor/doctorinfo`; 
     try {
@@ -38,7 +41,7 @@ const ans=mydata.map((key)=>{
          <br />
          <span style={{color:"navy", fontWeight:"bold"}}> City : {key.city}</span> 
         </Card.Text>
-        <Button variant="primary">Get Appointment</Button>
+        <Button variant="primary" onClick={()=>{navigate(`/getappointment/${key._id}`)}}>Get Appointment</Button>
       </Card.Body>
     </Card>
       

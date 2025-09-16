@@ -4,13 +4,13 @@ import Form from 'react-bootstrap/Form';
 import BackEndURL from "../util/BackEndUrl";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
-const SearchByCity = () => {
-    const [city, setCity] = useState("");
-    const [mydata, setMydata] = useState([]);
+const SearchBySpecialization = () => {
+      const [speciality, setSpeciality] = useState("");
+      const [mydata, setMydata] = useState([]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let api = `${BackEndURL}/doctor/searchbycity`;
-        const response = await axios.post(api, { city: city });
+        let api = `${BackEndURL}/doctor/searchbyspeciality`;
+        const response = await axios.post(api, { speciality: speciality });
         console.log(response.data);
         setMydata(response.data);
     }
@@ -19,9 +19,20 @@ const SearchByCity = () => {
             <h1> Search By City </h1>
             <Form style={{ width: "400px", margin: "auto" }}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Enter Doctor Name</Form.Label>
-                    <Form.Control type="text" value={city} onChange={(e) => { setCity(e.target.value) }} />
-                </Form.Group>
+        <Form.Label>Select Specialization</Form.Label>
+       <Form.Select aria-label="Default select example" name="speciality" onChange={(e)=>{setSpeciality(e.target.value)}}>
+      <option>Open this select menu</option>
+      <option value="Cardiologist">Cardiologist</option>
+      <option value="Gastroenterologist">Gastroenterologist</option>
+      <option value="Neurologist">Neurologist</option>
+       <option value="Radiologist">Radiologist</option>
+        <option value="General Physician">General Physician</option>
+         <option value="ENT Specialist">ENT Specialist</option>
+          <option value="Dentist">Dentist</option>
+           <option value="Gynecologist">Gynecologist</option>
+            <option value="Surgeon">Surgeon</option>
+    </Form.Select>
+      </Form.Group>
                 <Button variant="primary" type="submit" onClick={handleSubmit}>
                     Submit
                 </Button>
@@ -64,4 +75,6 @@ const SearchByCity = () => {
         </>
     )
 }
-export default SearchByCity;
+export default SearchBySpecialization;
+
+

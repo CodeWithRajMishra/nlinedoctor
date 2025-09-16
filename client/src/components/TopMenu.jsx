@@ -14,7 +14,7 @@ const TopMenu = () => {
             <Nav.Link as={Link} to="searchdoctor">Search Doctor</Nav.Link>
             <Nav.Link as={Link} to="searchbycity">Search By City</Nav.Link>
                <Nav.Link as={Link} to="searchbyspeciality">Search By Specialization</Nav.Link>
-            <Nav.Link as={Link} to="contact">Contact Us</Nav.Link>
+            <Nav.Link as={Link} to="contactus">Contact Us</Nav.Link>
           </Nav>
         </Container>
       </Navbar>
