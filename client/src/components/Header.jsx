@@ -73,6 +73,8 @@ const Header=()=>{
        try {
            const response = await axios.post(api, {email:email1, password:password1});
            console.log(response.data);
+           localStorage.setItem("docname", response.data.doctorname);
+           localStorage.setItem("docid", response.data._id);
            navigate("/doctordashboard");
 
        } catch (error) {

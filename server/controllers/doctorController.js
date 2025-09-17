@@ -1,5 +1,5 @@
 const DoctorModel = require("../models/doctorModel");
-
+const PatientModel= require("../models/patientModel");
 
 
 const doctorSave=async(req, res)=>{
@@ -51,14 +51,14 @@ const doctorLogin=async(req, res)=>{
 }
 
 const doctorInfo=async(req, res)=>{
-     try {
+    
+  try {
           const Doctor = await DoctorModel.find();
           res.status(200).send(Doctor);
      } catch (error) {
         console.log(error);
      }
-      console.log("HHH");
-      res.send("OKKK");
+       
 }
 
 const doctorSearchByName=async(req, res)=>{
@@ -85,6 +85,28 @@ const getdoctorInfo=async(req, res)=>{
   res.send(Doctor);
 }
 
+
+const patientSave=async(req, res)=>{
+  const {id, patientname, deseases, address, contact, email } = req.body;
+    const Pateint = await PatientModel.create({
+          patientname: patientname, 
+        deseases: deseases,
+         contactno:contact,
+         address: address,
+         email: email,
+         docid: id
+    })
+
+res.status(201).send("Patient Detail Save!!");
+}
+
+const getPateintDetail=async(req, res)=>{
+      const {id} = req.query;
+      const patient = await PatientModel.find({docid:id})
+      res.send(patient);
+
+}
+
 module.exports={
     doctorSave,
     doctorLogin,
@@ -92,5 +114,7 @@ module.exports={
     doctorSearchByName,
     doctorSearchByCity,
     doctorSearchBySpeciality,
-    getdoctorInfo
+    getdoctorInfo,
+    patientSave,
+    getPateintDetail
 }

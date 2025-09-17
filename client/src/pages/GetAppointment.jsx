@@ -5,7 +5,6 @@ import axios from "axios";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-
 const GetAppointment=()=>{
    const {id} = useParams();
    const [mydata, setMydata] = useState({});
@@ -16,7 +15,6 @@ const GetAppointment=()=>{
       console.log(response.data);
       setMydata(response.data);
    }
-
  useEffect(()=>{
     loadData();
  }, []);
@@ -25,16 +23,24 @@ const GetAppointment=()=>{
       e.preventDefault();
       let name=e.target.name ;
       let value = e.target.value ;
-
       setInput(values=>({...values, [name]:value}));
       console.log(input);
-
  }
+
+const handleSubmit=async(e)=>{
+       e.preventDefault();
+       let api = `${BackEndURL}/doctor/patientsave`;
+       try {
+          const response = await axios.post(api, {id:id, ...input});
+          alert("patient detail save!!!");
+       } catch (error) {
+          console.log(error);
+       }
+}
 
 
     return(
-        <>
-      
+        <>      
       <center>
          <h1> Book Your Appointment </h1>
            <Card style={{ width: '18rem', margin:"10px" }}>
@@ -75,7 +81,7 @@ const GetAppointment=()=>{
         <Form.Label>Enter Email</Form.Label>
         <Form.Control type="text" name="email" onChange={handleInput} />
       </Form.Group>
-      <Button variant="primary" type="submit">
+      <Button variant="primary" type="submit" onClick={handleSubmit}>
         Submit
       </Button>
     </Form>

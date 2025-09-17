@@ -4,7 +4,6 @@ import ban2 from "../images/ban2.jpg";
 import ban3 from "../images/ban3.webp";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import doc1 from "../images/doc1.jpeg";
 import BackEndURL from '../util/BackEndUrl';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -13,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 const Home=()=>{
 const [mydata, setMydata] = useState([]);
 const navigate = useNavigate();
+
 const loadData =async()=>{
    let api=`${BackEndURL}/doctor/doctorinfo`; 
     try {
@@ -48,7 +48,8 @@ const ans=mydata.map((key)=>{
       </>
     )
 })
-    return(
+
+return(
         <>
            <Carousel>
       <Carousel.Item>
@@ -81,7 +82,9 @@ const ans=mydata.map((key)=>{
       <div id="docList">
          {ans}
       </div>
-        </>
-    )
+     </>      
+  
+ )   
 }
+
 export default Home;

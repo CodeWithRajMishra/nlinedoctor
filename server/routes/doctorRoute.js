@@ -12,6 +12,10 @@ route.post("/searchbyname", doctorController.doctorSearchByName);
 route.post("/searchbycity", doctorController.doctorSearchByCity);
 route.post("/searchbyspeciality", doctorController.doctorSearchBySpeciality);
 route.get("/getdocinfo", doctorController.getdoctorInfo);
+route.post("/patientsave", doctorController.patientSave);
+route.get("/showpatientlist", doctorController.getPateintDetail);
+
+
 
 
 
