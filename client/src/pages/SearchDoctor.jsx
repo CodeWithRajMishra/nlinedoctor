@@ -2,7 +2,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
 import axios from 'axios';
-import BackEndURL from '../util/BackEndUrl';
 import Card from 'react-bootstrap/Card';
 
 const SearchDoctor=()=>{
@@ -11,7 +10,7 @@ const SearchDoctor=()=>{
     
     const handleSubmit=async(e)=>{
         e.preventDefault();
-       let api=`${BackEndURL}/doctor/searchbyname`; 
+       let api=`${import.meta.env.VITE_API_URL}/doctor/searchbyname`; 
        const response = await axios.post(api, {name:name});
        console.log(response.data);
        setMydata(response.data);

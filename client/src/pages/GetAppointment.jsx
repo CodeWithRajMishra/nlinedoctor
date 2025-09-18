@@ -1,6 +1,5 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import BackEndURL from "../util/BackEndUrl";
 import axios from "axios";
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -10,7 +9,7 @@ const GetAppointment=()=>{
    const [mydata, setMydata] = useState({});
    const [input, setInput] = useState({});
    const loadData=async()=>{
-      let api = `${BackEndURL}/doctor/getdocinfo/?id=${id}`;
+      let api = `${import.meta.env.VITE_API_URL}/doctor/getdocinfo/?id=${id}`;
       const response= await axios.get(api);
       console.log(response.data);
       setMydata(response.data);
@@ -29,7 +28,7 @@ const GetAppointment=()=>{
 
 const handleSubmit=async(e)=>{
        e.preventDefault();
-       let api = `${BackEndURL}/doctor/patientsave`;
+       let api = `${import.meta.env.VITE_API_URL}/doctor/patientsave`;
        try {
           const response = await axios.post(api, {id:id, ...input});
           alert("patient detail save!!!");

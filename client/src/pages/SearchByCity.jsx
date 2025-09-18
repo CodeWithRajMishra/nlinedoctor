@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import BackEndURL from "../util/BackEndUrl";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 const SearchByCity = () => {
@@ -9,7 +8,7 @@ const SearchByCity = () => {
     const [mydata, setMydata] = useState([]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let api = `${BackEndURL}/doctor/searchbycity`;
+        let api = `${import.meta.env.VITE_API_URL}/doctor/searchbycity`;
         const response = await axios.post(api, { city: city });
         console.log(response.data);
         setMydata(response.data);

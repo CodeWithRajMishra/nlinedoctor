@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import BackEndURL from "../util/BackEndUrl";
 import axios from "axios";
 import Table from 'react-bootstrap/Table';
 const SearchBySpecialization = () => {
@@ -9,7 +8,7 @@ const SearchBySpecialization = () => {
       const [mydata, setMydata] = useState([]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let api = `${BackEndURL}/doctor/searchbyspeciality`;
+        let api = `${import.meta.env.VITE_API_URL}/doctor/searchbyspeciality`;
         const response = await axios.post(api, { speciality: speciality });
         console.log(response.data);
         setMydata(response.data);

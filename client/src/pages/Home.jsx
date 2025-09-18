@@ -4,7 +4,6 @@ import ban2 from "../images/ban2.jpg";
 import ban3 from "../images/ban3.webp";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import BackEndURL from '../util/BackEndUrl';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -14,7 +13,7 @@ const [mydata, setMydata] = useState([]);
 const navigate = useNavigate();
 
 const loadData =async()=>{
-   let api=`${BackEndURL}/doctor/doctorinfo`; 
+   let api=`${import.meta.env.VITE_API_URL}/doctor/doctorinfo`; 
     try {
          const response = await axios.get(api);
          console.log(response.data);

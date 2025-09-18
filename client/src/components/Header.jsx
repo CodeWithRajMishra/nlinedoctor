@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
-import BackEndURL from "../util/BackEndUrl";
 import axios from "axios";
 import { ToastContainer,  toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -69,7 +68,7 @@ const Header=()=>{
 
     const handleSubmit1=async(e)=>{
       e.preventDefault();
-       let api=`${BackEndURL}/doctor/doctorlogin`;  
+       let api=`${import.meta.env.VITE_API_URL}/doctor/doctorlogin`;  
        try {
            const response = await axios.post(api, {email:email1, password:password1});
            console.log(response.data);
