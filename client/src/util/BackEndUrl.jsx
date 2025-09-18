@@ -1,7 +1,7 @@
 
 
 
-const BackEndURL="http://localhost:8000";
+const BackEndURL="https://onlineappointment-byz4.onrender.com";
 
 
 export default BackEndURL;

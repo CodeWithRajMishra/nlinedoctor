@@ -2,10 +2,8 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import BackEndURL from "../util/BackEndUrl";
 import Table from 'react-bootstrap/Table';
-
 const PatientList =()=>{
   const [mydata, setMydata] = useState([]);
-
   const loadData=async()=>{
          let api = `${BackEndURL}/doctor/showpatientlist/?id=${localStorage.getItem("docid")}`;
          try {
@@ -38,12 +36,10 @@ let i=0;
       </>
     )
   })
-
     return(
         <>
           <h2> Patient Detail </h2>
           <hr />
-
  <Table striped bordered hover style={{width:"90%"}}>
       <thead>
         <tr>
@@ -62,5 +58,4 @@ let i=0;
         </>
     )
 }
-
 export default PatientList;
